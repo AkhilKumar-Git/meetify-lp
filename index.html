@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meetify — Playlists of Meetings & Transcripts</title>
+  
+  <!-- SEO & Metadata -->
+  <meta name="description" content="Meetify organizes your Zoom, Meet, and Teams recordings into interactive playlists with synchronized transcripts. Search, review, and share meeting moments in seconds.">
+  <meta name="keywords" content="meetings, transcripts, playlists, zoom, google meet, productivity, AI highlights, searchable transcripts">
+  <meta name="author" content="Meetify Inc.">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Meetify — Playlists of Meetings & Transcripts">
+  <meta property="og:description" content="Organize your meeting recordings into curated playlists with synchronized transcripts. Search and navigate meeting highlights seamlessly.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="app-header">
+    <div class="container header-container">
+      <a href="#" class="logo">
+        <svg class="logo-svg" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="20" rx="6" fill="url(#logo-grad)" />
+          <path d="M10 8L16 12L10 16V8Z" fill="white" />
+          <defs>
+            <linearGradient id="logo-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#00f5ff" />
+              <stop offset="1" stop-color="#9d4edd" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">meetify</span>
+      </a>
+      <nav class="nav-menu">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#demo" class="nav-link">Interactive Demo</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+      </nav>
+      <div class="header-actions">
+        <a href="#demo" class="btn btn-secondary btn-sm">Try Demo</a>
+        <a href="#" class="btn btn-primary btn-sm">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-glow"></div>
+    <div class="container hero-container">
+      <div class="badge-container">
+        <span class="hero-badge">✨ Reimagining Meeting Recalls</span>
+      </div>
+      <h1 class="hero-title">Your meetings.<br>Curated like your <span class="highlight-text">favorite playlist.</span></h1>
+      <p class="hero-subtitle">Stop digging through hours of Zoom recordings. Meetify automatically organizes meetings into smart playlists with interactive, searchable transcripts. Jump to key moments in one click.</p>
+      <div class="hero-buttons">
+        <a href="#demo" class="btn btn-primary btn-lg">Launch Interactive Demo</a>
+        <a href="#features" class="btn btn-secondary btn-lg">Explore Features</a>
+      </div>
+      
+      <!-- Micro stats overlay -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">10x</span>
+          <span class="stat-label">Faster Recall</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Automated Playlists</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">0 hr</span>
+          <span class="stat-label">Manual Note-Taking</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Demo Section -->
+  <section id="demo" class="demo-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">See Meetify in Action</h2>
+        <p class="section-subtitle">Experience the magic of synchronized playlists. Select a track, click play, search keywords, or tap directly on the transcript to jump around.</p>
+      </div>
+      
+      <!-- Interactive Sandbox -->
+      <div class="playground-card glass-container">
+        <!-- Sidebar: Playlists -->
+        <div class="playground-sidebar">
+          <div class="sidebar-header">
+            <span class="sidebar-title">My Playlists</span>
+            <button class="btn-icon" title="Create Playlist" aria-label="Create Playlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+          </div>
+          
+          <ul class="playlist-list" id="playlist-list-container">
+            <!-- Loaded dynamically by JS -->
+          </ul>
+        </div>
+        
+        <!-- Main Panel: Player & Transcript -->
+        <div class="playground-main">
+          <!-- Top meeting bar -->
+          <div class="meeting-header">
+            <div class="meeting-details">
+              <span class="playlist-badge" id="active-playlist-name">🎯 Product Dev</span>
+              <h3 class="meeting-title" id="active-meeting-title">Loading meeting...</h3>
+              <div class="meeting-meta">
+                <span id="active-meeting-date">June 5, 2026</span>
+                <span class="meta-dot"></span>
+                <span id="active-meeting-duration">0:00</span>
+              </div>
+            </div>
+            <div class="meeting-participants" id="participant-avatars">
+              <!-- Loaded dynamically -->
+            </div>
+          </div>
+          
+          <!-- Player Controls & Waveform -->
+          <div class="player-container">
+            <div class="player-controls">
+              <button class="btn-play" id="play-btn" aria-label="Play">
+                <svg class="play-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5V19L19 12L8 5Z"/>
+                </svg>
+                <svg class="pause-icon hidden" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6 19H10V5H6V19ZM14 5V19H18V5H14Z"/>
+                </svg>
+              </button>
+              
+              <div class="player-time-scrub">
+                <span class="current-time" id="current-time-text">0:00</span>
+                <div class="scrub-bar-container" id="scrub-container">
+                  <div class="scrub-bar-bg"></div>
+                  <div class="scrub-bar-progress" id="progress-bar"></div>
+                  <div class="scrub-handle" id="progress-handle"></div>
+                </div>
+                <span class="total-time" id="total-time-text">0:00</span>
+              </div>
+            </div>
+            
+            <!-- Dynamic Waveform visualizer -->
+            <div class="waveform-visualizer" id="waveform-visualizer">
+              <!-- Rendered via JS bars -->
+            </div>
+          </div>
+
+          <!-- AI Chapters / Jump points -->
+          <div class="chapters-container">
+            <span class="chapters-label">AI Chapters:</span>
+            <div class="chapters-list" id="chapters-list-container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Transcript panel -->
+          <div class="transcript-panel">
+            <div class="transcript-header">
+              <h4>Transcript & Highlights</h4>
+              <div class="search-box">
+                <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="transcript-search" placeholder="Search transcript...">
+              </div>
+            </div>
+            <div class="transcript-scroll" id="transcript-body">
+              <!-- Sentences populated by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid Section -->
+  <section id="features" class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Designed for modern knowledge loops</h2>
+        <p class="section-subtitle">Meetify packages raw meeting transcripts and video links into digestible modules that actually get reviewed.</p>
+      </div>
+      
+      <div class="bento-grid">
+        <!-- Feature 1 -->
+        <div class="bento-card glass-container reveal-on-scroll">
+          <div class="feature-icon-wrapper magenta">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Dynamic Playlists</h3>
+          <p class="feature-desc">Automatically tag and group team syncs, user interviews, and product demos. Build sharing habits without the administrative overhead.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bento-card glass-container reveal-on-scroll">
+          <div class="feature-icon-wrapper teal">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Karaoke Subtitles</h3>
+          <p class="feature-desc">Transcripts are mapped word-by-word with the timeline. Tap any phrase, sentence, or AI summary bullet to play exactly that frame.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bento-card glass-container reveal-on-scroll">
+          <div class="feature-icon-wrapper violet">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+          <h3 class="feature-title">Omniscient Search</h3>
+          <p class="feature-desc">Search through weeks of discussions instantly. Find the exact conversation about "security updates" or "UI contrast ratio" without scrolling.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="bento-card glass-container reveal-on-scroll">
+          <div class="feature-icon-wrapper gold">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </div>
+          <h3 class="feature-title">AI Chaptering</h3>
+          <p class="feature-desc">Get auto-generated agendas and summaries. Click on a structured agenda point to watch that portion of the presentation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="pricing-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Transparent pricing for every scale</h2>
+        <p class="section-subtitle">Whether you're an independent builder or orchestrating a large team, we have a playlist plan for you.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Basic Plan -->
+        <div class="pricing-card glass-container reveal-on-scroll">
+          <div class="pricing-header">
+            <span class="plan-name">Solo</span>
+            <div class="plan-price"><span class="price-symbol">$</span>0<span class="price-period">/ mo</span></div>
+            <p class="plan-desc">For builders who want to search their personal meetings.</p>
+          </div>
+          <ul class="plan-features">
+            <li>5 transcript hours per month</li>
+            <li>3 core playlists</li>
+            <li>Basic search functionality</li>
+            <li>Browser-based recordings sync</li>
+          </ul>
+          <a href="#" class="btn btn-secondary btn-full">Start Free</a>
+        </div>
+
+        <!-- Pro Plan (Popular) -->
+        <div class="pricing-card glass-container pricing-featured reveal-on-scroll">
+          <div class="featured-badge">MOST POPULAR</div>
+          <div class="pricing-header">
+            <span class="plan-name">Professional</span>
+            <div class="plan-price"><span class="price-symbol">$</span>19<span class="price-period">/ mo</span></div>
+            <p class="plan-desc">For teams looking to stay aligned and archive syncs.</p>
+          </div>
+          <ul class="plan-features">
+            <li>Unlimited transcript hours</li>
+            <li>Unlimited custom playlists</li>
+            <li>Advanced AI Chapter summaries</li>
+            <li>Deep cross-playlist search</li>
+            <li>Zoom, Slack & Google Meet integration</li>
+          </ul>
+          <a href="#" class="btn btn-primary btn-full">Get Started Pro</a>
+        </div>
+
+        <!-- Enterprise Plan -->
+        <div class="pricing-card glass-container reveal-on-scroll">
+          <div class="pricing-header">
+            <span class="plan-name">Enterprise</span>
+            <div class="plan-price"><span class="price-symbol">$</span>49<span class="price-period">/ mo</span></div>
+            <p class="plan-desc">For large scaling organizations requiring audit trails.</p>
+          </div>
+          <ul class="plan-features">
+            <li>Everything in Pro</li>
+            <li>SAML SSO & Advanced RLS</li>
+            <li>Custom transcription vocabulary</li>
+            <li>Dedicated workspace customer support</li>
+            <li>Unlimited team members access</li>
+          </ul>
+          <a href="#" class="btn btn-secondary btn-full">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-glow"></div>
+    <div class="container cta-container glass-container reveal-on-scroll">
+      <h2 class="cta-title">Turn audio dump into structured assets</h2>
+      <p class="cta-subtitle">Get started today. Create your first playlist in 60 seconds. No credit card required.</p>
+      <div class="cta-form">
+        <input type="email" placeholder="Enter your work email" class="email-input" required>
+        <button class="btn btn-primary">Start Free Trial</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <svg class="logo-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="20" height="20" rx="6" fill="url(#logo-grad-f)" />
+            <path d="M10 8L16 12L10 16V8Z" fill="white" />
+            <defs>
+              <linearGradient id="logo-grad-f" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00f5ff" />
+                <stop offset="1" stop-color="#9d4edd" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="logo-text">meetify</span>
+        </a>
+        <p class="footer-tagline">Curate your meeting intelligence.</p>
+      </div>
+      <div class="footer-links-group">
+        <div class="footer-links">
+          <h5>Product</h5>
+          <a href="#features">Features</a>
+          <a href="#demo">Demo</a>
+          <a href="#pricing">Pricing</a>
+        </div>
+        <div class="footer-links">
+          <h5>Resources</h5>
+          <a href="#">Documentation</a>
+          <a href="#">Guides</a>
+          <a href="#">API Status</a>
+        </div>
+        <div class="footer-links">
+          <h5>Company</h5>
+          <a href="#">About Us</a>
+          <a href="#">Blog</a>
+          <a href="#">Careers</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Meetify Inc. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App Logic -->
+  <script src="app.js"></script>
+</body>
+</html>

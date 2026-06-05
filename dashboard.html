@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meetify Dashboard — Curate Your Meetings</title>
+  
+  <!-- SEO & Metadata -->
+  <meta name="description" content="Manage and view your automated meeting playlists and AI transcripts on your Meetify dashboard.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="dashboard-body">
+  <!-- Header / Navigation -->
+  <header class="app-header dashboard-header">
+    <div class="container-fluid header-container">
+      <div class="left-section">
+        <a href="index.html" class="logo">
+          <svg class="logo-svg" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="20" height="20" rx="6" fill="url(#logo-grad)" />
+            <path d="M10 8L16 12L10 16V8Z" fill="white" />
+            <defs>
+              <linearGradient id="logo-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00f5ff" />
+                <stop offset="1" stop-color="#9d4edd" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="logo-text">meetify</span>
+        </a>
+        <nav class="nav-menu">
+          <a href="#" class="nav-link active" id="tabDashboard">Dashboard</a>
+          <a href="#" class="nav-link" id="tabIntelligence">Intelligence</a>
+          <a href="index.html#demo" class="nav-link">Playlists</a>
+          <a href="#" class="nav-link">Transcripts</a>
+          <a href="#" class="nav-link">Team</a>
+          <a href="#" class="nav-link">Settings</a>
+        </nav>
+      </div>
+      
+      <div class="header-actions">
+        <!-- Search Box -->
+        <div class="search-box">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="dashboard-search" placeholder="Search meetings...">
+        </div>
+        
+        <!-- Profile Dropdown -->
+        <div class="profile-dropdown">
+          <button class="avatar accent-2 profile-trigger" id="profileTrigger" title="User Settings">AG</button>
+          <div class="dropdown-menu" id="dropdownMenu">
+            <div class="dropdown-header">
+              <p class="user-name">Akhil Gupta</p>
+              <p class="user-email">akhil@meetify.ai</p>
+            </div>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item">My Profile</a>
+            <a href="#" class="dropdown-item">Organization Setup</a>
+            <a href="#" class="dropdown-item">Billing & Plans</a>
+            <div class="dropdown-divider"></div>
+            <a href="index.html" class="dropdown-item logout-link">Log out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace -->
+  <main class="dashboard-main-content">
+    <div class="container-fluid content-container">
+      <div id="dashboardViewContainer">
+      
+      <!-- Top Title and Info -->
+      <div class="dashboard-title-row">
+        <h1 class="page-title">Workspace Dashboard</h1>
+        <p class="page-subtitle">Welcome back, Akhil. Here are your meeting insights for this week.</p>
+      </div>
+      
+      <!-- 4 Cards Grid -->
+      <div class="metrics-grid">
+        <!-- Card 1 -->
+        <div class="metric-card glass-container">
+          <div class="card-header">
+            <span class="card-title">Total Transcribed</span>
+            <div class="card-icon teal">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-value">142.5 hrs</div>
+            <div class="card-trend positive">+12.4% <span class="trend-meta">from last month</span></div>
+          </div>
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="metric-card glass-container">
+          <div class="card-header">
+            <span class="card-title">Active Playlists</span>
+            <div class="card-icon violet">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18V5l12-2v13"></path>
+                <circle cx="6" cy="18" r="3"></circle>
+                <circle cx="18" cy="16" r="3"></circle>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-value">16</div>
+            <div class="card-trend positive">+2 new <span class="trend-meta">this week</span></div>
+          </div>
+        </div>
+        
+        <!-- Card 3 -->
+        <div class="metric-card glass-container">
+          <div class="card-header">
+            <span class="card-title">AI Summaries</span>
+            <div class="card-icon magenta">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-value">94</div>
+            <div class="card-trend neutral">99.8% <span class="trend-meta">accuracy rate</span></div>
+          </div>
+        </div>
+        
+        <!-- Card 4 -->
+        <div class="metric-card glass-container">
+          <div class="card-header">
+            <span class="card-title">Active Team Seats</span>
+            <div class="card-icon gold">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-value">24 / 30</div>
+            <div class="card-trend positive">+3 joined <span class="trend-meta">active now</span></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Primary Data Split Grid -->
+      <div class="dashboard-data-grid">
+        <!-- Left Column: Recent Meetings Table -->
+        <div class="table-card glass-container">
+          <div class="table-card-header">
+            <div class="header-text">
+              <h2 class="section-title-sm">Recent Transcriptions</h2>
+              <p class="section-subtitle-sm">A list of files processed in your organization.</p>
+            </div>
+            <div class="header-badge">✨ Auto Sync Enabled</div>
+          </div>
+          
+          <div class="table-wrapper">
+            <table class="meetings-table">
+              <thead>
+                <tr>
+                  <th>Meeting Title</th>
+                  <th>Playlist</th>
+                  <th>Date</th>
+                  <th>Duration</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="meetingsTableBody">
+                <!-- Playable (Demo integrated) -->
+                <tr class="playable-row" data-playlist="sprint" data-title="Sprint Planning: Meetify v2">
+                  <td>
+                    <div class="meeting-name-cell">
+                      <svg class="play-cell-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5V19L19 12L8 5Z"/>
+                      </svg>
+                      Sprint Planning: Meetify v2
+                    </div>
+                  </td>
+                  <td><span class="table-playlist-tag teal">🎯 Product Dev</span></td>
+                  <td>June 5, 2026</td>
+                  <td>0:25</td>
+                  <td><span class="status-badge success">Transcribed</span></td>
+                </tr>
+                
+                <!-- Playable (Demo integrated) -->
+                <tr class="playable-row" data-playlist="review" data-title="UX Review: Dark Theme Contrast">
+                  <td>
+                    <div class="meeting-name-cell">
+                      <svg class="play-cell-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5V19L19 12L8 5Z"/>
+                      </svg>
+                      UX Review: Dark Theme Contrast
+                    </div>
+                  </td>
+                  <td><span class="table-playlist-tag violet">🚀 Product Reviews</span></td>
+                  <td>June 2, 2026</td>
+                  <td>0:20</td>
+                  <td><span class="status-badge success">Transcribed</span></td>
+                </tr>
+                
+                <!-- Playable (Demo integrated) -->
+                <tr class="playable-row" data-playlist="sales" data-title="Enterprise Client Kickoff (Meetify Sync)">
+                  <td>
+                    <div class="meeting-name-cell">
+                      <svg class="play-cell-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5V19L19 12L8 5Z"/>
+                      </svg>
+                      Enterprise Client Kickoff (Meetify Sync)
+                    </div>
+                  </td>
+                  <td><span class="table-playlist-tag pink">💼 Sales Debriefs</span></td>
+                  <td>May 28, 2026</td>
+                  <td>0:20</td>
+                  <td><span class="status-badge success">Transcribed</span></td>
+                </tr>
+
+                <!-- Simulated row (Processing) -->
+                <tr class="simulated-row">
+                  <td>Weekly Sync & Standup</td>
+                  <td><span class="table-playlist-tag gold">⚙️ Operations</span></td>
+                  <td>June 6, 2026</td>
+                  <td>0:30</td>
+                  <td><span class="status-badge processing">Processing</span></td>
+                </tr>
+                
+                <!-- Playable (Demo integrated) -->
+                <tr class="playable-row" data-playlist="sprint" data-title="Sprint Planning: Meetify v2 (Older)">
+                  <td>
+                    <div class="meeting-name-cell">
+                      <svg class="play-cell-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5V19L19 12L8 5Z"/>
+                      </svg>
+                      Sprint Planning: Previous Iteration
+                    </div>
+                  </td>
+                  <td><span class="table-playlist-tag teal">🎯 Product Dev</span></td>
+                  <td>May 22, 2026</td>
+                  <td>0:18</td>
+                  <td><span class="status-badge success">Transcribed</span></td>
+                </tr>
+
+                <!-- Simulated row (Failed) -->
+                <tr class="simulated-row">
+                  <td>API Performance Alignment</td>
+                  <td><span class="table-playlist-tag gray">⚙️ Operations</span></td>
+                  <td>May 15, 2026</td>
+                  <td>0:15</td>
+                  <td><span class="status-badge failed">Failed</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- Right Column: Activity and Stats stacked -->
+        <div class="right-column-stack">
+          <!-- Recent Activity Feed -->
+          <div class="activity-card glass-container">
+            <h2 class="section-title-sm">Recent Workspace Actions</h2>
+            <p class="section-subtitle-sm">Live activities across members.</p>
+            
+            <div class="activity-list">
+              <!-- Item 1 -->
+              <div class="activity-item">
+                <div class="avatar accent-2 av-sm">AG</div>
+                <div class="activity-details">
+                  <p class="activity-text"><strong>Akhil Gupta</strong> highlighted a key moment in <em>Sprint Planning</em></p>
+                  <span class="activity-time">2 minutes ago</span>
+                </div>
+              </div>
+              
+              <!-- Item 2 -->
+              <div class="activity-item">
+                <div class="avatar accent-1 av-sm">SC</div>
+                <div class="activity-details">
+                  <p class="activity-text"><strong>Sarah Connor</strong> updated playlist <em>Product Reviews</em></p>
+                  <span class="activity-time">14 minutes ago</span>
+                </div>
+              </div>
+              
+              <!-- Item 3 -->
+              <div class="activity-item">
+                <div class="avatar accent-3 av-sm">DK</div>
+                <div class="activity-details">
+                  <p class="activity-text"><strong>David Kim</strong> shared <em>Enterprise Client Kickoff</em> to Slack</p>
+                  <span class="activity-time">1 hour ago</span>
+                </div>
+              </div>
+              
+              <!-- Item 4 -->
+              <div class="activity-item">
+                <div class="avatar ai-av av-sm">AI</div>
+                <div class="activity-details">
+                  <p class="activity-text"><strong>Meetify AI</strong> generated chapter indexes for <em>UX Review</em></p>
+                  <span class="activity-time">3 hours ago</span>
+                </div>
+              </div>
+              
+              <!-- Item 5 -->
+              <div class="activity-item">
+                <div class="avatar accent-1 av-sm">SC</div>
+                <div class="activity-details">
+                  <p class="activity-text"><strong>Sarah Connor</strong> created new playlist <em>Growth & Marketing</em></p>
+                  <span class="activity-time">Yesterday</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Platform Distribution Chart -->
+          <div class="chart-card glass-container">
+            <div class="chart-card-header">
+              <h2 class="section-title-sm">Platform Distribution</h2>
+              <p class="section-subtitle-sm">Meetings transcribed by source.</p>
+            </div>
+            
+            <div class="chart-content">
+              <div class="pie-chart-wrapper">
+                <div class="pie-chart-circle"></div>
+              </div>
+              
+              <div class="chart-legend">
+                <div class="legend-item">
+                  <span class="legend-dot zoom"></span>
+                  <span class="legend-name">Zoom</span>
+                  <span class="legend-value">45%</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-dot meet"></span>
+                  <span class="legend-name">Google Meet</span>
+                  <span class="legend-value">30%</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-dot teams"></span>
+                  <span class="legend-name">MS Teams</span>
+                  <span class="legend-value">15%</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-dot other"></span>
+                  <span class="legend-name">Other</span>
+                  <span class="legend-value">10%</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="chart-card-footer">
+              <div class="trend-text">
+                Trending up by 5.2% this month
+                <svg class="trend-up-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                  <polyline points="17 6 23 6 23 12"></polyline>
+                </svg>
+              </div>
+              <div class="footer-meta">Showing total source platforms for last 6 months</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div> <!-- End dashboardViewContainer -->
+      
+      <!-- Intelligence Tab Content Container (Hidden by default) -->
+      <div id="intelligenceViewContainer" style="display: none;">
+        <div class="dashboard-title-row">
+          <h1 class="page-title">Competitive Intelligence Engine</h1>
+          <p class="page-subtitle">Scrape luxury car sites via Firecrawl and analyze competitive positioning using OpenAI.</p>
+        </div>
+        
+        <!-- API Setup & Controls Panel -->
+        <div class="intel-form-card glass-container">
+          <div class="intel-form-grid">
+            <div class="form-group">
+              <label for="scrapeUrl">Target Website URL</label>
+              <input type="url" id="scrapeUrl" placeholder="https://www.porsche.com" value="https://www.porsche.com/usa/models/911/911-carrera-models/">
+            </div>
+            
+            <div class="form-group">
+              <label for="firecrawlKey">Firecrawl API Key</label>
+              <div class="password-input-wrapper">
+                <input type="password" id="firecrawlKey" placeholder="fc-...">
+                <button type="button" class="btn-toggle-password" tabindex="-1">👁️</button>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="openaiKey">OpenAI API Key</label>
+              <div class="password-input-wrapper">
+                <input type="password" id="openaiKey" placeholder="sk-...">
+                <button type="button" class="btn-toggle-password" tabindex="-1">👁️</button>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="intelPromptSelect">Analysis Focus</label>
+              <select id="intelPromptSelect">
+                <option value="swot">SWOT Analysis & Positioning</option>
+                <option value="pricing">Pricing Model & Luxury Tier Analysis</option>
+                <option value="features">Product Features & Specs Matrix</option>
+                <option value="marketing">Marketing Strategy & Key Value Props</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="intel-form-actions">
+            <button class="btn btn-secondary" id="btnRunMockIntel">Try Demo Simulation</button>
+            <button class="btn btn-primary" id="btnRunRealIntel">
+              <svg class="btn-icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+              Run Intelligence Analysis
+            </button>
+          </div>
+        </div>
+        
+        <!-- Loading State -->
+        <div class="intel-loader-card glass-container" id="intelLoader" style="display: none;">
+          <div class="loader-spinner"></div>
+          <p class="loader-status" id="intelLoaderStatus">Waiting for analysis...</p>
+        </div>
+        
+        <!-- Results Column Split -->
+        <div class="intel-results-grid" id="intelResults" style="display: none;">
+          <!-- Left: Scraped Markdown -->
+          <div class="results-card glass-container">
+            <div class="results-card-header">
+              <h2 class="section-title-sm">Scraped Web Markdown</h2>
+              <div class="results-actions">
+                <span class="badge-count" id="markdownLength">0 characters</span>
+                <button class="btn btn-secondary btn-sm" id="btnCopyMarkdown" style="padding: 4px 10px; font-size: 11px;">Copy</button>
+              </div>
+            </div>
+            <pre class="scroll-pre"><code id="markdownOutput"></code></pre>
+          </div>
+          
+          <!-- Right: AI Strategic Insights -->
+          <div class="results-card glass-container">
+            <div class="results-card-header">
+              <h2 class="section-title-sm">AI Strategic Analysis</h2>
+              <span class="badge-status" id="intelBadgeStatus">Processed via GPT-4o</span>
+            </div>
+            <div class="insights-output-wrapper" id="insightsOutput"></div>
+          </div>
+        </div>
+        
+      </div> <!-- End intelligenceViewContainer -->
+      
+    </div>
+  </main>
+  
+  <!-- JavaScript -->
+  <script src="dashboard.js"></script>
+</body>
+</html>

@@ -126,10 +126,29 @@ const transcriptBody = document.getElementById("transcript-body");
 
 // --- INITIALIZATION ---
 document.addEventListener("DOMContentLoaded", () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const playlistId = urlParams.get('playlist');
+  if (playlistId) {
+    const foundIdx = PLAYLISTS_DATA.findIndex(p => p.id === playlistId);
+    if (foundIdx !== -1) {
+      activePlaylistIdx = foundIdx;
+    }
+  }
+
   renderPlaylists();
-  loadMeeting(0, 0);
+  loadMeeting(activePlaylistIdx, 0);
   initEventListeners();
   initScrollEffects();
+
+  // Scroll to demo section automatically if playlist was specified in URL
+  if (playlistId) {
+    const demoSec = document.getElementById("demo");
+    if (demoSec) {
+      setTimeout(() => {
+        demoSec.scrollIntoView({ behavior: "smooth" });
+      }, 500);
+    }
+  }
 });
 
 // --- RENDER SIDEBAR PLAYLISTS ---
